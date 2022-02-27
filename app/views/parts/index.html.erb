@@ -1,0 +1,106 @@
+<h1>登録/編集</h1>
+
+<%= form_tag("/parts/register",  autocomplete: "off") do %>
+  <table class="parts_register">
+    <thead>
+      <tr>
+      <th rowspan="2" class="part_number">Part number</th>
+      <th class="th_points" colspan="4">溶接箇所数</th>
+      <th rowspan="2">Tig</th>
+      <th rowspan="2">追加工</th>
+      <th rowspan="2">曲げ</th>
+      <th rowspan="2">レーザー</th>
+      <th rowspan="2">バルブ</th>
+      <th rowspan="2">EBW</th>
+      <th rowspan="2">長尺</th>
+      <th rowspan="2" class="right">外注</th>
+    </tr>
+    <tr>
+      <th class="diagonal-fractions">1/2″</th>
+      <th class="diagonal-fractions">3/8″</th>
+      <th class="diagonal-fractions">1/4″</th>
+      <th class="diagonal-fractions">1/8″</th>
+    </tr>
+    </thead>
+    <tbody class="part_register">
+      <tr>
+        <td><input name="part_number" class="part_number_input" value="<%= @part.part_number if @part %>"></td>
+        <td><input name="half" class="point" value="<%= @part.half if @part %>"></td>
+        <td><input name="thr_eth" class="point" value="<%= @part.thr_eth if @part %>"></td>
+        <td><input name="qtr" class="point" value="<%= @part.qtr if @part %>"></td>
+        <td><input name="eth" class="point" value="<%= @part.eth if @part %>"></td>
+        <td><input name="tig" type="checkbox" <% if @part && @part.tig %>checked<% end %>></td>
+        <td><input name="add" type="checkbox" <% if @part && @part.add %>checked<% end %>></td>
+        <td><input name="bend" type="checkbox" <% if @part && @part.bend %>checked<% end %>></td>
+        <td><input name="laser" type="checkbox" <% if @part && @part.laser %>checked<% end %>></td>
+        <td><input name="valve" type="checkbox" <% if @part && @part.valve %>checked<% end %>></td>
+        <td><input name="ebw" type="checkbox" <% if @part && @part.ebw %>checked<% end %>></td>
+        <td><input name="long" type="checkbox" <% if @part && @part.long %>checked<% end %>></td>
+        <td class="right"><input name="out" type="checkbox" <% if @part && @part.out %>checked<% end %>></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <input type="submit" value="登録" class="button">
+<% end %>
+
+<table class="sticky_table">
+  <thead>
+    <tr>
+      <th rowspan="2" class="part_number">Part number</th>
+      <th class="th_points" colspan="4">溶接箇所数</th>
+      <th rowspan="2">Tig</th>
+      <th rowspan="2">追加工</th>
+      <th rowspan="2">曲げ</th>
+      <th rowspan="2">レーザー</th>
+      <th rowspan="2">バルブ</th>
+      <th rowspan="2">EBW</th>
+      <th rowspan="2">長尺</th>
+      <th rowspan="2" class="right">外注</th>
+    </tr>
+    <tr>
+      <th class="diagonal-fractions">1/2″</th>
+      <th class="diagonal-fractions">3/8″</th>
+      <th class="diagonal-fractions">1/4″</th>
+      <th class="diagonal-fractions">1/8″</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @parts.each do |part| %>
+      <tr>
+        <td class="part_title" rowspan="2">
+          <%= link_to(part.part_number, "/items/part/#{part.part_number}") %> 
+
+          <%= link_to("/parts/edit/#{part.part_number}", class: "far") do %>
+            <i class="far fa-edit part_edit" title="編集"></i>
+          <% end %>
+          <%= link_to("/parts/destroy/#{part.part_number}", class: "far", data: {confirm: "削除しますか？"}, title: "削除確認" ) do %>
+            <i class="far fa-trash-alt part_edit" title="削除"></i>
+          <% end %>
+        </td>
+        <td class="points" colspan="4">
+          <% points = part.half + part.thr_eth + part.qtr + part.eth %>
+          <% if points == 0 %>
+            -
+          <% else %>
+            <%= points %>
+          <% end %>
+        </td>
+        <td rowspan="2"><% if part.tig %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.add %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.bend %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.laser %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.valve %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.ebw %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if part.long %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2" class="right"><% if part.out %><i class="fas fa-check"></i><% else %>-<% end %></td>
+      </tr>
+      <tr>
+        <td class="point"><% if part.half == 0 %>-<% else %><%= part.half %><% end %></td>
+        <td class="point"><% if part.thr_eth == 0 %>-<% else %><%= part.thr_eth %><% end %></td>
+        <td class="point"><% if part.qtr == 0 %>-<% else %><%= part.qtr %><% end %></td>
+        <td class="point"><% if part.eth == 0 %>-<% else %><%= part.eth %><% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

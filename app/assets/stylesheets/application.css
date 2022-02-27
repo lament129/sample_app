@@ -1,0 +1,204 @@
+html {
+  font-size: 70%;
+  font-family: 
+    "Meiryo",
+    "Helvetica Neue",
+    "Arial",
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    sans-serif;
+}
+
+header {
+  width: 100%;
+}
+
+body {
+  width: 1000px;
+  margin-left: 50px;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+header a {
+  margin: 0 10px;
+}
+
+h1, h2 {
+  color: #444;
+}
+
+h1 {
+  margin-left: 20px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 25px;
+}
+
+input {
+  text-align: center;
+}
+
+th, tbody td {
+  border-bottom: solid 1px black;
+  border-left: solid 1px black;
+}
+
+th {
+  border-top: solid 1px black;
+  padding: 0 10px;
+  background: rgb(217, 225, 242);
+  font-weight: 900;
+}
+
+td {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.sticky_table thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  white-space: nowrap;
+}
+
+.sticky_table thead tr:nth-child(1) th {
+  top: 0;
+}
+
+.sticky_table thead tr:nth-child(2) th {
+  top: 1.5rem;
+}
+
+.right {
+  border-right: solid 1px black;
+}
+
+.th_points {
+  border-bottom: none;
+}
+
+.fa {
+  cursor: pointer;
+}
+
+.fas {
+  font-size: 1.2em;
+}
+
+.part_edit {
+  text-decoration: none;
+}
+
+.import {
+  margin-left: 20px;
+}
+
+.button {
+  margin-left: 30px;
+}
+
+.total {
+  font-weight: bold;
+}
+
+.diagonal-fractions {
+  font-variant-numeric: diagonal-fractions;
+  font-size: 135%;
+}
+
+.part_number_input {
+  height: 10px;
+  font-size: 75%;
+  width: 10em;
+}
+
+.part_number {
+  width: 12em;
+}
+
+.point {
+  height: 10px;
+  width: 10px;
+  font-size: 75%;
+}
+
+.no_data {
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+  letter-spacing: 0.5em
+}
+
+.points {
+  font-size: 100%;
+  font-weight: bold;
+  padding: 2px;
+}
+
+.unregisted {
+  background-color: #ddd;
+}
+
+.status {
+  width: 5em;
+}
+
+.note {
+  width: 15em;
+}
+
+.pull_in {
+  background-color: orange;
+  color: crimson;
+  font-weight: 900;
+}
+
+.push_out {
+  background-color: paleturquoise;
+  color: deepskyblue;
+  font-weight: 900;
+}
+
+.new {
+  background-color: lightgreen;
+  color: forestgreen;
+  font-weight: 900;
+}
+
+.remain {
+  background-color: rgb(255, 250, 242);
+  color: #444;
+  font-size: 90%;
+}
+
+.ex_reply {
+  width: 7em;
+  font-size: 90%;
+}
+
+.reply {
+  background-color: yellow;
+}
+
+.part {
+  width: 8em;
+}
+
+nav.pagination {
+  display: none;
+}
+
+.scroll-list {
+  padding: 0;
+}
+
+.laser_check {
+  color: limegreen;
+  font-size: 11px;
+}

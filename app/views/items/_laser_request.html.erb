@@ -1,0 +1,9 @@
+<% if item[:las_req] == true %>
+  <%= link_to "/items/laser/request/cancel/#{item[:id]}", method: :post, remote: true do %>
+    <i class="fas fa-check laser_check"></i>
+  <% end %>
+<% else %>
+  <%= link_to "/items/laser/request/create/#{item[:id]}", method: :post, remote: true do %>
+    <i class="far fa-square"></i>
+  <% end %>
+<% end %>

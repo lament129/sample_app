@@ -1,0 +1,81 @@
+<h1>FASM-<%= @work_number %></h1>
+
+<table class="sorttbl" id="myTable">
+  <thead>
+    <tr>
+      <th>Order number</th>
+      <th>Item</th>
+      <th>Part number></th>
+      <th>Qty</th>
+      <th class="status">Status</th>
+      <th>前回回答</th>
+      <th>Supplier reply</th>
+      <th>工番</th>
+      <th class="note">備考</th>
+      <th class="right">溶接数</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% qty_total = 0 %>
+  <% points_total = 0 %>
+
+    <% @items.each do |item| %>
+      <tr class="item">
+        <% qty_total += item.qty %>
+
+        <% unless out?(item) %>
+          <% points_total += points(item) * item.qty %>
+        <% end %>
+
+        <td><%= item.order_number %></td>
+        <td><%= item.item_number %></td>
+        <% if @part_numbers.include?(item.part_number) %>
+          <td>
+        <% else %>
+          <td class="unregisted">
+        <% end %>
+            <%= link_to(item.part_number, "/items/part/#{item.part_number}") %></td>
+        <td><%= item.qty %></td>
+        <% if item.status == "Pull in" %>
+              <td class="pull_in">
+            <% elsif item.status == "Push out" %>
+              <td class="push_out">
+            <% elsif item.status == "New" %>
+              <td class="new">
+            <% else %>
+              <td class="remain">
+            <% end %>
+            <%= item.status %>
+            </td>
+            <td class="ex_reply"><% if item.ex_reply %><%= item.ex_reply.strftime('%Y/%m/%d') %><% end %></td>
+        <td><%= link_to(item.supplier_reply.strftime('%Y/%m/%d'), "/items/date/#{item.supplier_reply}") %></td>
+        <td><%= link_to(item.work_number, "/items/work/#{item.work_number}") %></td>
+        <td><%= item.note %></td>
+        <td class="right">
+          <% if out?(item) || points(item) == 0 %>
+            -
+          <% else %>
+            <%= points(item) * item.qty %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="total"><%= qty_total %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="total"><%= points_total %></td>
+    </tr>
+  </tfoot>
+</table>
+

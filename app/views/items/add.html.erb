@@ -1,0 +1,72 @@
+<h1>追加工</h1>
+<div class="main_table">
+  <% qty_total = 0 %>
+  <% i = 0 %>
+  <% while i < @items.length do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Order number</th>
+          <th>Item</th>
+          <th class="part">Part number</th>
+          <th>Qty</th>
+          <th class="status">Status</th>
+          <th>前回回答</th>
+          <th>Supplier reply</th>
+          <th>工番</th>
+          <th class="right part">備考</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% loop { %>
+          <% qty_total += @items[i][:qty] %>
+
+          <tr>
+            <td><%= @items[i][:order_number] %></td>
+            <td><%= @items[i][:item_number] %></td>
+            <td><%= link_to(@items[i][:part_number], "/items/part/#{@items[i][:part_number]}") %></td>
+            <td><%= @items[i][:qty] %></td>
+            <% if @items[i][:status] == "Pull in" %>
+              <td class="pull_in">
+            <% elsif @items[i][:status] == "Push out" %>
+              <td class="push_out">
+            <% elsif @items[i][:status] == "New" %>
+              <td class="new">
+            <% else %>
+              <td class="remain">
+            <% end %>
+            <%= @items[i][:status] %>
+            </td>
+            <td class="ex_reply"><% if @items[i][:ex_reply] %><%= @items[i][:ex_reply].strftime('%Y/%m/%d') %><% end %></td>
+            <td><%= link_to(@items[i][:supplier_reply].strftime('%Y/%m/%d'), "/items/date/#{@items[i][:supplier_reply]}") %></td>
+            <td><%= link_to(@items[i][:work_number], "/items/work/#{@items[i][:work_number]}") %></td>
+            <td class="right"><% if laser?(@items[i]) %>レーザー<% else %>-<% end %></td>
+          </tr>
+
+          <% if @items[i + 1] && @items[i][:supplier_reply] != @items[i + 1][:supplier_reply] || !@items[i + 1] %>
+            <% i += 1 %>
+            <% break %>
+          <% end %>
+
+          <% i += 1 %>
+        <% } %>
+      </tbody>
+    
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="total"><%= qty_total %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <% qty_total = 0 %>
+      </tfoot>
+    </table>
+  <% end %>
+</div>

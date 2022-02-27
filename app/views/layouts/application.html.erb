@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Production Management</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <script src="javascripts/w3.js"></script>
+  </head>
+  <header>
+    <h2>
+      <a href="/">All</a>
+      <a href="/items/rescheduled">日付変更分</a>
+      <a href="/items/weld">社内溶接</a>
+      <a href="/items/tig">Tig</a>
+      <a href="/items/add">追加工</a>
+      <a href="/items/bend">曲げ</a>
+      <a href="/items/laser">レーザー</a>
+      <a href="/items/valve">バルブ</a>
+      <a href="/items/ebw">EBW</a>
+      <a href="/items/long">長尺</a>
+      <a href="/items/out">外注</a>
+      <a href="/parts">登録/編集</a>
+    </h2>
+  </header>
+  <body>
+    <%= yield %>
+  </body>
+</html>

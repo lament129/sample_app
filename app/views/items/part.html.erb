@@ -1,0 +1,103 @@
+<h1>
+  <%= @part_number %>
+
+  <%= link_to("/parts/edit/#{@part_number}", class: "far") do %>
+    <i class="far fa-edit" title="編集"></i>
+  <% end %>
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="th_points" colspan="4">溶接箇所数</th>
+      <th rowspan="2">Tig</th>
+      <th rowspan="2">追加工</th>
+      <th rowspan="2">曲げ</th>
+      <th rowspan="2">レーザー</th>
+      <th rowspan="2">バルブ</th>
+      <th rowspan="2">EBW</th>
+      <th rowspan="2">長尺</th>
+      <th class="right" rowspan="2">外注</th>
+    </tr>
+    <tr>
+      <th class="diagonal-fractions">1/2″</th>
+      <th class="diagonal-fractions">3/8″</th>
+      <th class="diagonal-fractions">1/4″</th>
+      <th class="diagonal-fractions">1/8″</th>
+    </tr>
+  </thead>
+  <% if @part %>
+    <tbody>
+      <tr>
+        <td class="points" colspan="4">
+          <% points = @part.half + @part.thr_eth + @part.qtr + @part.eth %>
+          <% if points == 0 %>
+            -
+          <% else %>
+            <%= points %>
+          <% end %>
+        </td>
+        <td rowspan="2"><% if @part.tig %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.add %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.bend %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.laser %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.valve %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.ebw %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td rowspan="2"><% if @part.long %><i class="fas fa-check"></i><% else %>-<% end %></td>
+        <td class="right" rowspan="2"><% if @part.out %><i class="fas fa-check"></i><% else %>-<% end %></td>
+      </tr>
+      <tr>
+        <td class="point"><% if @part.half == 0 %>-<% else %><%= @part.half %><% end %></td>
+        <td class="point"><% if @part.thr_eth == 0 %>-<% else %><%= @part.thr_eth %><% end %></td>
+        <td class="point"><% if @part.qtr == 0 %>-<% else %><%= @part.qtr %><% end %></td>
+        <td class="point"><% if @part.eth == 0 %>-<% else %><%= @part.eth %><% end %></td>
+      </tr>
+    </tbody>
+  <% else %>
+    <tbody>
+      <tr>
+        <td class="no_data right" colspan="12">未登録</td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order number</th>
+      <th>Item</th>
+      <th>Part number</th>
+      <th>Qty</th>
+      <th>Supplier reply</th>
+      <th>工番</th>
+      <th class="right note">備考</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% qty_total = 0 %>
+    <% @items.each do |item| %>
+      <tr>
+        <% qty_total += item.qty %>
+        <td><%= item.order_number %></td>
+        <td><%= item.item_number %></td>
+        <td><%= link_to(item.part_number, "/items/part/#{item.part_number}") %></td>
+        <td><%= item.qty %></td>
+        <td><%= link_to(item.supplier_reply.strftime('%Y/%m/%d'), "/items/date/#{item.supplier_reply}") %></td>
+        <td><%= link_to(item.work_number, "/items/work/#{item.work_number}") %></td>
+        <td class="right"><%= item.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="total"><%= qty_total %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>

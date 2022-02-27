@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part_number: MyString
+  points: 1
+  laser: false
+  tig: false
+  add: false
+  long;boolean: MyString
+  ebw: false
+  bend: false
+  out: false
+
+two:
+  part_number: MyString
+  points: 1
+  laser: false
+  tig: false
+  add: false
+  long;boolean: MyString
+  ebw: false
+  bend: false
+  out: false
