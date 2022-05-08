@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #get '/' => "home#top"
+  get '/' => "home#top"
 
   get 'items' => "items#index"
   get 'items/part/:part_number' => "items#part"
