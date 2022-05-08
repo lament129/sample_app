@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/' => "home#top"
+
   get 'items/index' => "items#index"
   
   get 'items/part/:part_number' => "items#part"
